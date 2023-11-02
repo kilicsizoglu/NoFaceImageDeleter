@@ -21,7 +21,7 @@ def main():
                     j += 1
                 else:
                     print("Görüntüde yüz bulunamadı.")
-                    os.remove(file_path)  # Dosyayı silmek için dosya yolunu kullanın
+                    os.remove(file_path)
             else:
                 print("Görüntü yüklenemedi:", file)
             i += 1
