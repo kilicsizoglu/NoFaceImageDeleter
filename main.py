@@ -8,6 +8,7 @@ def main():
     files_list = os.listdir(path)
     length = len(files_list)
     i = 0
+    j = 0
     for file in files_list:
         file_path = os.path.join(path, file)
         if file is not None:
@@ -17,14 +18,15 @@ def main():
                 faces = face_cascade.detectMultiScale(gray, 1.5, 5)
                 if len(faces) > 0:
                     print("Görüntüde yüz bulundu.")
+                    j += 1
                 else:
                     print("Görüntüde yüz bulunamadı.")
                     os.remove(file_path)  # Dosyayı silmek için dosya yolunu kullanın
             else:
                 print("Görüntü yüklenemedi:", file)
             i += 1
-        print(str(i) + "/" + str(length) + " işlendi.")
-
+    print(str(i) + "/" + str(length) + " işlendi.")
+    print(str(j) + "/" + str(length) + " görüntüde yüz bulundu.")
     print("Tüm işlemler tamamlandı.")
 
 if __name__ == '__main__':
