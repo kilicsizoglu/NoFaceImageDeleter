@@ -1,7 +1,5 @@
 import os
-
 import cv2
-
 
 def main():
     path = 'images/'
@@ -11,17 +9,23 @@ def main():
     length = len(files_list)
     i = 0
     for file in files_list:
-        image = cv2.imread(file)
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(gray, 1.05, 5)
-        if len(faces) > 0:
-            print("Görüntüde yüz bulundu.")
-        else:
-            print("Görüntüde yüz bulunamadı.")
-            os.remove(path + file)
-        i += 1
+        file_path = os.path.join(path, file)
+        if file is not None:
+            image = cv2.imread(file_path)
+            if image is not None:
+                gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+                faces = face_cascade.detectMultiScale(gray, 1.5, 5)
+                if len(faces) > 0:
+                    print("Görüntüde yüz bulundu.")
+                else:
+                    print("Görüntüde yüz bulunamadı.")
+                    os.remove(file_path)  # Dosyayı silmek için dosya yolunu kullanın
+            else:
+                print("Görüntü yüklenemedi:", file)
+            i += 1
         print(str(i) + "/" + str(length) + " işlendi.")
 
+    print("Tüm işlemler tamamlandı.")
 
 if __name__ == '__main__':
     main()
